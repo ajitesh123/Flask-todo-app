@@ -5,6 +5,12 @@
     <title>Todo App</title>
   </head>
   <body>
+    <form class="" action="/todo/create" method="post">
+      <input type="text" name="description" value="item">
+      <!-- Description is the name of the field we will get back -->
+      <input type="submit" value="Create">
+      <!-- Create the name of the button -->
+    </form>
     <ul>
       {% for d in data %}
       <li>{{d.description}}</li>
