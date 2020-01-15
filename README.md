@@ -17,6 +17,7 @@ First, install virtualenv and virtualenvwrapper to manage virtual environment.
 > pip3 install virtualenvwrapper  
 ```
 Second, let's install packages to help run the flask application.
+
 ```
 >pip3 install flask
 >pip3 install flask_sqlalchemy
