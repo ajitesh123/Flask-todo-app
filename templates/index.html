@@ -29,6 +29,8 @@
         e.preventDefault();
         fetch('/todos/create', {
           method: 'POST',
+          // This body and header is sent to the server or route handler which will get the value
+          // of the description
           body: JSON.stringify({
             'description': document.getElementById('description').value
           }),
@@ -43,6 +45,8 @@
           li.innerHTML = jsonResponse['description'];
           document.getElementById('todos').appendChild(li);
           document.getElementById('error').className = 'hidden';
+          //JS is updating the content of the page and updating the database as well
+          //That's why async
         })
         .catch(function() {
           document.getElementById('error').className = '';
