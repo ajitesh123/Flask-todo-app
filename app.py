@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sys
+from flask_migrate import Migrate, MigrateCommand
 
 app=Flask(__name__)
 #Creates an application names after your file. It's an instance of flask
@@ -9,17 +10,22 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db=SQLAlchemy(app)
 #Links SQLAlchemy with flask app
 
+migrate = Migrate(app, db)
+
+
 class Todo(db.Model):
     __tablename__='todos'
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(), nullable=False)
+    completed = db.Column(db.Boolean, nullable=False,
+    default=False)
 
     def __repr__(self):
-        return f("<Todo {self.id}: {self.description}>")
+        return f"<Todo {self.id}: {self.description}>"
 
 
 @app.route('/todos/create', methods=['POST'])
-'''Sort of function to call function. Decoraters could be used to call function multiple times.'''
+#Sort of function to call function. Decoraters could be used to call function multiple times.'''
 def create_todo():
     error = False
     body = {}
