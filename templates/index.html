@@ -8,20 +8,31 @@
         display: none;
       }
     </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <form id="form">
-      <input type="text" autofocus id="description" name="description" value="">
+    <div class="jumbotron">
+      <h1 class="display-4">Todo App</h1>
+        <p class="lead">This is a simple todo app. Add items you want to accomplish</p>
+    </div>
+
+    <form id="form" class="navbar navbar-light bg-light" autocomplete="off">
+      <input type="text" autofocus id="description" name="description" autocomplete="false">
       <!-- Description is the name of the field we will get back -->
       <input type="submit" value="Create">
       <!-- Create the name of the button -->
     </form>
     <div id="error" class="hidden">Something went wrong!</div>
-    <ul id='todos'>
+    <div class="card" style="width: 40rem;">
+  <div class="card-header">
+    Items
+  </div>
+    <ul id='todos' class="list-group" "list-group-flush">
       {% for d in data %}
-      <li>{{d.description}}</li>
+      <li id=li1 class= "list-group-item">{{d.description}}</li>
       {% endfor %}
     </ul>
+    </div>
     <!-- TODO: the deaful behaviuour would have led to a full page refresh -->
 
     <script type="text/javascript">
@@ -41,7 +52,7 @@
         .then(response => response.json())
         .then(jsonResponse => {
           console.log(jsonResponse);
-          li = document.createElement('li');
+          li = document.createElement('li1');
           li.innerHTML = jsonResponse['description'];
           document.getElementById('todos').appendChild(li);
           document.getElementById('error').className = 'hidden';
