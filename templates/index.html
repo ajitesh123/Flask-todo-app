@@ -38,17 +38,33 @@
     <div id="error" class="hidden">Something went wrong!</div>
     <ul id='todos'>
       {% for d in data %}
-      <li><input class="check-completed" data-id="{{ d.id }}"type="checkbox" {% if d.completed %} checked {% endif %}/
+      <li><input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked {% endif %}/
         >
         {{d.description}}
-        <button type="button" name="button">&cross;</button>
+        <button class="delete-button" data-id="{{ d.id }}">&cross;</button>
 
       </li>
       {% endfor %}
     </ul>
-    <!-- TODO: the deaful behaviuour would have led to a full page refresh -->
+    <!-- : the deaful behaviuour would have led to a full page refresh -->
+
 
     <script type="text/javascript">
+      const deleteBtns = document.querySelectorAll('.delete-button');
+      for (let i = 0; i < deleteBtns.length; i++) {
+        const btn = deleteBtns[i];
+        btn.onclick = function(e) {
+          const todoId = e.target.dataset['id'];
+          fetch('/todos/' + todoId, {
+            method: 'DELETE'
+          })
+          .then(function(){
+            const item = e.target.parentElement;
+            item.remove();
+          })
+        }
+      }
+
       const checkboxes = document.querySelectorAll('.check-completed');
       for (let i=0; i <checkboxes.length; i++) {
         const checkbox = checkboxes[i];
