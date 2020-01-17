@@ -23,9 +23,21 @@ class Todo(db.Model):
     def __repr__(self):
         return f"<Todo {self.id}: {self.description}>"
 
+@app.route('/todos/<todo_id>/set-completed', methods=['POST'])
+def set_completed_todo(todo_id):
+    try:
+        completed = request.get_json()['completed']
+        todo=Todo.query.get(todo_id)
+        todo.completed=completed
+        db.session.commit()
+    except:
+        db.session.rollback()
+    finally:
+        db.session.close()
+    return redirect(url_for('index'))
 
+#Sort of function to call function. Decoraters could be used to call function multiple times.
 @app.route('/todos/create', methods=['POST'])
-#Sort of function to call function. Decoraters could be used to call function multiple times.'''
 def create_todo():
     error = False
     body = {}
@@ -51,4 +63,4 @@ def create_todo():
 
 @app.route('/')
 def index():
-    return render_template('index.html', data=Todo.query.all())
+    return render_template('index.html', data=Todo.query.order_by('id').all())
