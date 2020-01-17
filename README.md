@@ -25,6 +25,7 @@ Second, let's install packages to help run the flask application.
 >pip3 install postgresql
 ```
 ## Step in Reverse Order
+```
 006c33b Implemented delete option
 fc4a1c9 delete button added to the frontend
 93ff411 add database migration
@@ -38,3 +39,4 @@ d513825 AJAX implemented
 6a4c8d8 add option created
 2acec3e Created database and dynamic content
 29a5ffe first commit
+```
