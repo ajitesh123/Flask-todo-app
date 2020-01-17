@@ -24,3 +24,17 @@ Second, let's install packages to help run the flask application.
 >pip3 install psycopg2-binary
 >pip3 install postgresql
 ```
+## Step in Reverse Order
+006c33b Implemented delete option
+fc4a1c9 delete button added to the frontend
+93ff411 add database migration
+1746bdf Adopted session closing pratice
+454c9a0 Tring new things in Readme
+1d93112 Tring new things in Readme
+9a8f8ad Update README.md
+48af4cd Update README.md
+958d31f Updating Readme
+d513825 AJAX implemented
+6a4c8d8 add option created
+2acec3e Created database and dynamic content
+29a5ffe first commit
