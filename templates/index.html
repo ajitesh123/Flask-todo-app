@@ -7,11 +7,15 @@
       .hidden{
         display: none;
       }
+      .lists-wrapper, .todos-wrapper{
+        display: inline-block;
+        vertical-align: top;
+      }
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
-        width: 200px;
+        width: 300px;
       }
       li {
         clear: both;
@@ -29,24 +33,36 @@
     </style>
   </head>
   <body>
-    <form id="form">
-      <input type="text" autofocus id="description" name="description" value="">
-      <!-- Description is the name of the field we will get back -->
-      <input type="submit" value="Create">
-      <!-- Create the name of the button -->
-    </form>
-    <div id="error" class="hidden">Something went wrong!</div>
-    <ul id='todos'>
-      {% for d in data %}
-      <li><input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked {% endif %}/
-        >
-        {{d.description}}
-        <button class="delete-button" data-id="{{ d.id }}">&cross;</button>
+    <div class="lists-wrapper">
+      <ul id="lists">
+        {% for list in lists %}
+        <li>
+          <a href="/lists/{{list.id}}">{{list.name}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="todos-wrapper">
+      <h4>{{active_list.name}}</h4>
+      <form id="form">
+        <input type="text" autofocus id="description" name="description" value="">
+        <!-- Description is the name of the field we will get back -->
+        <input type="submit" value="Create">
+        <!-- Create the name of the button -->
+      </form>
+      <div id="error" class="hidden">Something went wrong!</div>
+      <ul id='todos'>
+        {% for todo in todos %}
+        <li><input class="check-completed" data-id="{{ todo.id }}" type="checkbox" {% if todo.completed %} checked {% endif %}/
+          >
+          {{todo.description}}
+          <button class="delete-button" data-id="{{ todo.id }}">&cross;</button>
 
-      </li>
-      {% endfor %}
-    </ul>
-    <!-- : the deaful behaviuour would have led to a full page refresh -->
+        </li>
+        {% endfor %}
+      </ul>
+      <!-- : the deaful behaviuour would have led to a full page refresh -->
+    </div>
 
 
     <script type="text/javascript">
